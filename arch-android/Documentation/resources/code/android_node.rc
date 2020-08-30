@@ -1,0 +1,53 @@
+## begin ionadmin
+1 1 ''
+s
+
+a contact +1 +3600 2 2 100000
+a contact +1 +3600 1 1 100000
+
+a contact +1 +3600 1 2 100000
+a contact +1 +3600 2 1 100000
+
+a range +1 +3600 1 1 1
+a range +1 +3600 2 2 1
+
+a range +1 +3600 1 2 1
+a range +1 +3600 2 1 1
+
+m production 1000000
+m consumption 1000000
+## end ionadmin
+
+## begin bpadmin
+1
+
+a scheme ipn 'ipnfw' 'ipnadminep'
+
+a endpoint ipn:1.0 x
+a endpoint ipn:1.1 q
+a endpoint ipn:1.2 q
+
+a protocol tcp 1400 100
+
+# ANDROID_NODE
+a induct tcp 192.168.232.2:1113 tcpcli
+
+# PC_NODE
+a outduct tcp 192.168.0.150:1113 tcpclo
+
+# ANDROID_NODE
+a outduct tcp 192.168.232.2:1113 tcpclo
+
+s
+## end bpadmin
+
+## begin ipnadmin
+# ANDROID_NODE
+a plan 1 tcp/192.168.232.2:1113
+# PC_NODE
+a plan 2 tcp/192.168.0.150:1113
+## end ipnadmin
+
+## begin ionsecadmin
+1
+## end ionsecadmin
